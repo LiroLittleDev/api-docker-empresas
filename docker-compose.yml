@@ -1,0 +1,21 @@
+# 🔹 Versão do Compose que estamos usando
+version: '3.8'
+
+# 🔹 Definição dos serviços (neste caso, só a API)
+services:
+  api:
+    # 🔸 Constrói a imagem usando o Dockerfile atual (.)
+    build: .
+    # 🔸 Faz o mapeamento da porta:
+    # Porta 3000 do container -> Porta 3000 da sua máquina (localhost:3000)
+    ports:
+      - "3000:3000"
+    # 🔸 Faz o mapeamento do volume para persistência do banco de dados
+    # Cria uma pasta local ./data que será usada para armazenar empresa.db
+    volumes:
+      - ./data:/app/data
+    # 🔸 Faz o container reiniciar automaticamente caso ele pare ou dê erro
+    restart: unless-stopped
+
+# 🔹 Definição dos volumes (opcional neste caso, porque usamos volume direto no mapeamento)
+volumes: {}
